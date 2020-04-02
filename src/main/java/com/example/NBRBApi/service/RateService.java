@@ -1,6 +1,6 @@
-package com.example.calculator.service.rate;
+package com.example.NBRBApi.service;
 
-import com.example.calculator.model.rate.Rate;
+import com.example.NBRBApi.model.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

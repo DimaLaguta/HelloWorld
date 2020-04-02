@@ -1,8 +1,8 @@
 package com.example.calculator.controller;
 
-import com.example.calculator.model.calculator.InputData;
-import com.example.calculator.model.calculator.OutputData;
-import com.example.calculator.service.calculator.CalculatorService;
+import com.example.calculator.model.InputData;
+import com.example.calculator.model.OutputData;
+import com.example.calculator.service.CalculatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

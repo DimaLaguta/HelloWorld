@@ -1,8 +1,8 @@
-package com.example.calculator.controller;
+package com.example.NBRBApi.controller;
 
-import com.example.calculator.model.rate.Rate;
-import com.example.calculator.service.rate.CurrencyService;
-import com.example.calculator.service.rate.RateService;
+import com.example.NBRBApi.model.Rate;
+import com.example.NBRBApi.service.CurrencyService;
+import com.example.NBRBApi.service.RateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;

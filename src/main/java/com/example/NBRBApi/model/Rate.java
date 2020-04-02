@@ -1,4 +1,4 @@
-package com.example.calculator.model.rate;
+package com.example.NBRBApi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

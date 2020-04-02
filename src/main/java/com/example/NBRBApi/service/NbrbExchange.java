@@ -1,7 +1,7 @@
-package com.example.calculator.service.rate;
+package com.example.NBRBApi.service;
 
-import com.example.calculator.model.rate.Currency;
-import com.example.calculator.model.rate.Rate;
+import com.example.NBRBApi.model.Currency;
+import com.example.NBRBApi.model.Rate;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.core.ParameterizedTypeReference;

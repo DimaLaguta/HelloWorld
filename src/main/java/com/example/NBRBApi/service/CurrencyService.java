@@ -1,6 +1,6 @@
-package com.example.calculator.service.rate;
+package com.example.NBRBApi.service;
 
-import com.example.calculator.model.rate.Currency;
+import com.example.NBRBApi.model.Currency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class CurrencyService {
 
     @PostConstruct
     private void postConstructor() {
-        currencies=nbrbExchange.getAllCurrencies();
+        currencies = nbrbExchange.getAllCurrencies();
     }
 
     public boolean isValid(String curAbbreviation) {
