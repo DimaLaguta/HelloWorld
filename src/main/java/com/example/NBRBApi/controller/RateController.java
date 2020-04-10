@@ -1,8 +1,12 @@
 package com.example.NBRBApi.controller;
 
-import com.example.NBRBApi.model.Rate;
-import com.example.NBRBApi.service.CurrencyService;
-import com.example.NBRBApi.service.RateService;
+import com.example.NBRBApi.model.domain.Rate;
+import com.example.NBRBApi.model.domain.RateShort;
+import com.example.NBRBApi.model.service.CurrencyService;
+import com.example.NBRBApi.model.service.RateService;
+import com.example.NBRBApi.model.service.RateShortService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -20,10 +24,13 @@ public class RateController {
     private RateService rateService;
     @Autowired
     private CurrencyService currencyService;
+    @Autowired
+    private RateShortService rateShortService;
 
-    @GetMapping(value = "")
+    public static final Logger LOGGER = LoggerFactory.getLogger(RateController.class.getName());
+
+    @GetMapping()
     public ResponseEntity<List<Rate>> getAllRates() {
-
         List<Rate> rates = rateService.getAllRates();
         return new ResponseEntity<>(rates, HttpStatus.OK);
     }
@@ -34,6 +41,7 @@ public class RateController {
                                                             @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
 
         if (!currencyService.isValid(curAbbreviation)) {
+            LOGGER.error("curAbbreviation is invalid");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -42,5 +50,25 @@ public class RateController {
         } else {
             return new ResponseEntity<>(Arrays.asList(rateService.getRate(curAbbreviation)), HttpStatus.OK);
         }
+    }
+
+    @GetMapping(value = "/history/{curAbbreviation}")
+    public ResponseEntity<List<RateShort>> getHistory(@PathVariable String curAbbreviation) {
+
+        if (!currencyService.isValid(curAbbreviation)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        List<RateShort> result = rateShortService.getHistory(curAbbreviation);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+
+    }
+
+    @GetMapping(value = "/sync")
+    public ResponseEntity syncWithNbrb() {
+        rateService.syncRate();
+        rateShortService.syncRateShort();
+        currencyService.syncCurrency();
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

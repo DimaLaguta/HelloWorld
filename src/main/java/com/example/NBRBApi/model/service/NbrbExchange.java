@@ -1,7 +1,8 @@
-package com.example.NBRBApi.service;
+package com.example.NBRBApi.model.service;
 
-import com.example.NBRBApi.model.Currency;
-import com.example.NBRBApi.model.Rate;
+import com.example.NBRBApi.model.domain.Currency;
+import com.example.NBRBApi.model.domain.Rate;
+import com.example.NBRBApi.model.domain.RateShort;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.core.ParameterizedTypeReference;
@@ -42,6 +43,22 @@ public class NbrbExchange {
     public Rate getRate(String curAbbreviation, LocalDate date) {
         String url = "https://www.nbrb.by/api/exrates/rates/{curAbbreviation}?ondate={Date}&paramMode=2";
         return restTemplate.getForObject(url, Rate.class, curAbbreviation, date);
+    }
+
+
+    public List<RateShort> getRateShorts(int curId,LocalDate startDate,LocalDate endDate){
+        String url = "https://www.nbrb.by/api/exrates/rates/dynamics/{curId}?startdate={Date}&enddate={Date}";
+        ResponseEntity<List<RateShort>> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<RateShort>>() {
+                },
+                curId,
+                startDate,
+                endDate
+        );
+        return responseEntity.getBody();
     }
 
     public List<Currency> getAllCurrencies() {
