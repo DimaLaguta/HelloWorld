@@ -2,7 +2,6 @@ package com.example.NBRBApi.controller;
 
 import com.example.NBRBApi.model.domain.Rate;
 import com.example.NBRBApi.model.domain.RateShort;
-import com.example.NBRBApi.model.service.CurrencyService;
 import com.example.NBRBApi.model.service.RateService;
 import com.example.NBRBApi.model.service.RateShortService;
 import org.slf4j.Logger;
@@ -23,8 +22,6 @@ public class RateController {
     @Autowired
     private RateService rateService;
     @Autowired
-    private CurrencyService currencyService;
-    @Autowired
     private RateShortService rateShortService;
 
     public static final Logger LOGGER = LoggerFactory.getLogger(RateController.class.getName());
@@ -40,7 +37,7 @@ public class RateController {
                                                             @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
                                                             @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
 
-        if (!currencyService.isValid(curAbbreviation)) {
+        if (!rateService.isValid(curAbbreviation)) {
             LOGGER.error("curAbbreviation is invalid");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -55,7 +52,7 @@ public class RateController {
     @GetMapping(value = "/history/{curAbbreviation}")
     public ResponseEntity<List<RateShort>> getHistory(@PathVariable String curAbbreviation) {
 
-        if (!currencyService.isValid(curAbbreviation)) {
+        if (!rateService.isValid(curAbbreviation)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -68,7 +65,6 @@ public class RateController {
     public ResponseEntity syncWithNbrb() {
         rateService.syncRate();
         rateShortService.syncRateShort();
-        currencyService.syncCurrency();
         return new ResponseEntity(HttpStatus.OK);
     }
 }

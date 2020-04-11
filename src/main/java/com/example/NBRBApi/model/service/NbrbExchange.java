@@ -1,6 +1,5 @@
 package com.example.NBRBApi.model.service;
 
-import com.example.NBRBApi.model.domain.Currency;
 import com.example.NBRBApi.model.domain.Rate;
 import com.example.NBRBApi.model.domain.RateShort;
 import org.apache.http.client.HttpClient;
@@ -61,15 +60,15 @@ public class NbrbExchange {
         return responseEntity.getBody();
     }
 
-    public List<Currency> getAllCurrencies() {
-        String url = "https://www.nbrb.by/API/ExRates/Currencies";
-        ResponseEntity<List<Currency>> responseEntity = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<Currency>>() {
-                }
-        );
-        return responseEntity.getBody();
-    }
+//    public List<Currency> getAllCurrencies() {
+//        String url = "https://www.nbrb.by/API/ExRates/Currencies";
+//        ResponseEntity<List<Currency>> responseEntity = restTemplate.exchange(
+//                url,
+//                HttpMethod.GET,
+//                null,
+//                new ParameterizedTypeReference<List<Currency>>() {
+//                }
+//        );
+//        return responseEntity.getBody();
+//    }
 }

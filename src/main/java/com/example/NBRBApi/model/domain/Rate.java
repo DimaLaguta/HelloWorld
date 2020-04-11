@@ -10,11 +10,9 @@ import java.util.Date;
 @Entity
 public class Rate {
 
-    //private Long id;
     @Id
-    // @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("Cur_ID")
-    public int curID;
+    public int id;
     @JsonProperty("Date")
     public LocalDate date;
     @JsonProperty("Cur_Abbreviation")
@@ -30,11 +28,11 @@ public class Rate {
     }
 
     public int getCurID() {
-        return curID;
+        return id;
     }
 
-    public void setCurID(int curID) {
-        this.curID = curID;
+    public void setCurID(int id) {
+        this.id = id;
     }
 
     public LocalDate getDate() {
@@ -76,10 +74,6 @@ public class Rate {
     public void setCurOfficialRate(double curOfficialRate) {
         this.curOfficialRate = curOfficialRate;
     }
-
-    //@OneToMany(mappedBy = "curID",fetch = FetchType.EAGER)
-//    public Set<RateShortDelete> byDates;
-
 
 }
 

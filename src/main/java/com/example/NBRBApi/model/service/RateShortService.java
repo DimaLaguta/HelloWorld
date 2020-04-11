@@ -33,7 +33,7 @@ public class RateShortService {
         LocalDate endDate = LocalDate.now();
 
         for (Rate i : rates) {
-            List<RateShort> rateShortList = nbrbExchange.getRateShorts(i.curID, startDate, endDate);
+            List<RateShort> rateShortList = nbrbExchange.getRateShorts(i.id, startDate, endDate);
             rateShortRepo.saveAll(rateShortList);
         }
     }
@@ -41,7 +41,7 @@ public class RateShortService {
     public List<RateShort> getHistory(String curAbbreviation) {
         LOGGER.info("Get history " + curAbbreviation);
 
-        return rateShortRepo.findByCurID(rateRepo.findByCurAbbreviation(curAbbreviation).curID);
+        return rateShortRepo.findByCurID(rateRepo.findByCurAbbreviation(curAbbreviation).id);
         //jdbc
         //return rateShortJdbc.findByCurId(rateRepo.findByCurAbbreviation(curAbbreviation).curID);
     }

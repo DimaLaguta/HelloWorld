@@ -1,6 +1,6 @@
-package com.example.calculator.model.calculator;
+package com.example.calculator.model;
 
-public enum OPERATOR {
+public enum Operator {
     ADDITION,
     SUBTRACTION,
     MULTIPLICATION,

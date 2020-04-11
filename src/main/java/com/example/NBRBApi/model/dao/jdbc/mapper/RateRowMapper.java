@@ -10,7 +10,7 @@ public class RateRowMapper implements RowMapper<Rate> {
     @Override
     public Rate mapRow(ResultSet resultSet, int i) throws SQLException {
         Rate rate = new Rate();
-        rate.setCurID(resultSet.getInt("curid"));
+        rate.setCurID(resultSet.getInt("id"));
         rate.setCurAbbreviation(resultSet.getString("cur_abbreviation"));
         rate.setCurName(resultSet.getString("cur_name"));
         rate.setCurOfficialRate(resultSet.getDouble("cur_official_rate"));

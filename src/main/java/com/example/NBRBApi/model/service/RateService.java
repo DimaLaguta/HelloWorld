@@ -1,8 +1,8 @@
 package com.example.NBRBApi.model.service;
 
+import com.example.NBRBApi.model.dao.DataJpa.RateRepo;
 import com.example.NBRBApi.model.dao.jdbc.RateJdbc;
 import com.example.NBRBApi.model.domain.Rate;
-import com.example.NBRBApi.model.dao.DataJpa.RateRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,13 @@ public class RateService {
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
+    }
+
+    public boolean isValid(String curAbbreviation) {
+        Rate resRate = null;
+        resRate = rateRepo.findByCurAbbreviation(curAbbreviation);
+
+        return resRate != null;
     }
 
     public List<Rate> getAllRates() {
@@ -82,7 +89,8 @@ public class RateService {
 
         Rate rate = new Rate();
         try {
-            rate = nbrbExchange.getRate(curAbbreviation, date);
+            //rate = nbrbExchange.getRate(curAbbreviation, date);
+            rate =rateJdbc.getRateByCurAbbreviationAndDate(curAbbreviation,date);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
