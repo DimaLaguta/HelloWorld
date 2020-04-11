@@ -1,13 +1,13 @@
-package com.example.calculator.service.calculator;
+package com.example.calculator.service;
 
-import com.example.calculator.model.calculator.InputData;
-import com.example.calculator.model.calculator.OPERATOR;
-import com.example.calculator.model.calculator.OutputData;
+import com.example.calculator.model.InputData;
+import com.example.calculator.model.Operator;
+import com.example.calculator.model.OutputData;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public interface CalculatorService {
-    Map<String, OPERATOR> map = new HashMap<>();
-    OutputData calculate(InputData data, OPERATOR operator);
+    Map<String, Operator> map = new HashMap<>();
+    OutputData calculate(InputData data, Operator operator);
 }

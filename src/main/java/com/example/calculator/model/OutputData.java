@@ -1,4 +1,4 @@
-package com.example.calculator.model.calculator;
+package com.example.calculator.model;
 
 public class OutputData {
     private Double result;
